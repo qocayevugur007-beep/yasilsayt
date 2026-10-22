@@ -1,0 +1,538 @@
+
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mənim Saytım</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+      background: linear-gradient(135deg, #111827, #312e81, #581c87);
+      min-height: 100vh;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      padding: 22px 8%;
+    }
+
+    nav h2 {
+      margin: 0;
+      color: #c4b5fd;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 15px;
+    }
+
+    nav a:hover {
+      color: #c4b5fd;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 75px 20px 50px;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 60px);
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      color: #ddd6fe;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    button {
+      padding: 13px 20px;
+      border: none;
+      border-radius: 9px;
+      background: #a78bfa;
+      color: #1e1b4b;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      background: #c4b5fd;
+    }
+
+    .kartlar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .kart {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 25px;
+      border-radius: 16px;
+      width: 260px;
+      text-align: center;
+    }
+
+    /* Giriş və qeydiyyat hissəsi */
+
+    #hesab {
+      padding: 50px 20px;
+      scroll-margin-top: 20px;
+    }
+
+    .auth-kart {
+      max-width: 420px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .auth-kart h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .auth-kart > p {
+      text-align: center;
+      color: #ddd6fe;
+    }
+
+    .tablar {
+      display: flex;
+      gap: 10px;
+      margin: 25px 0;
+    }
+
+    .tablar button {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.12);
+      color: white;
+    }
+
+    .tablar button.aktiv {
+      background: #a78bfa;
+      color: #1e1b4b;
+    }
+
+    .auth-form label {
+      display: block;
+      margin: 15px 0 7px;
+      font-size: 14px;
+    }
+
+    .auth-form input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #a78bfa;
+      border-radius: 8px;
+      background: #f8f7ff;
+      color: #1f2937;
+      font-size: 16px;
+    }
+
+    .auth-form input:focus {
+      outline: 2px solid #c4b5fd;
+      outline-offset: 2px;
+    }
+
+    .tam-duyme {
+      width: 100%;
+      margin-top: 22px;
+    }
+
+    .auth-form[hidden] {
+      display: none;
+    }
+
+    .mesaj {
+      margin-top: 18px;
+      padding: 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      text-align: center;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .mesaj:empty {
+      display: none;
+    }
+
+    .ugurlu {
+      color: #bbf7d0;
+    }
+
+    .xeta {
+      color: #fecaca;
+    }
+
+    #profil {
+      text-align: center;
+      padding: 25px;
+    }
+
+    #profil[hidden] {
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 35px 15px;
+      color: #ddd6fe;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        padding: 20px;
+      }
+
+      nav a {
+        margin-left: 8px;
+        font-size: 14px;
+      }
+
+      .hero {
+        padding-top: 55px;
+      }
+
+      .auth-kart {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <h2>MənimSaytım</h2>
+
+    <div>
+      <a href="#ana">Ana səhifə</a>
+      <a href="#haqqimda">Haqqımda</a>
+      <a href="#hesab" onclick="hesabiAc('login')">Giriş</a>
+      <a href="#hesab" onclick="hesabiAc('register')">Qeydiyyat</a>
+    </div>
+  </nav>
+
+  <section class="hero" id="ana">
+    <h1>Xoş gəlmisən! 👋</h1>
+
+    <p>
+      Bu mənim özüm hazırladığım ilk veb saytdır.<br>
+      Burada yeni ideyalarımı həyata keçirirəm.
+    </p>
+
+    <button onclick="mesajGoster()">Məni tanı</button>
+  </section>
+
+  <section class="kartlar" id="haqqimda">
+    <div class="kart">
+      <h2>💡 İdeyalar</h2>
+      <p>Yeni fikirlər və maraqlı layihələr.</p>
+    </div>
+
+    <div class="kart">
+      <h2>💻 Proqramlaşdırma</h2>
+      <p>HTML, CSS və JavaScript öyrənirəm.</p>
+    </div>
+
+    <div class="kart">
+      <h2>🚀 Məqsədlər</h2>
+      <p>Daha yaxşı veb saytlar yaratmaq.</p>
+    </div>
+  </section>
+
+  <!-- Giriş və qeydiyyat -->
+
+  <section id="hesab">
+    <div class="auth-kart">
+
+      <h2 id="authBasliq">Hesabına daxil ol</h2>
+      <p id="authIzah">Davam etmək üçün giriş et.</p>
+
+      <div class="tablar">
+        <button
+          type="button"
+          id="loginTab"
+          class="aktiv"
+          onclick="hesabiAc('login')">
+          Giriş
+        </button>
+
+        <button
+          type="button"
+          id="registerTab"
+          onclick="hesabiAc('register')">
+          Qeydiyyat
+        </button>
+      </div>
+
+      <!-- Giriş formu -->
+
+      <form id="loginForm" class="auth-form">
+        <label for="loginEmail">E-poçt ünvanı</label>
+        <input
+          id="loginEmail"
+          type="email"
+          placeholder="email@example.com"
+          autocomplete="email"
+          required>
+
+        <label for="loginPassword">Şifrə</label>
+        <input
+          id="loginPassword"
+          type="password"
+          placeholder="Şifrən"
+          autocomplete="current-password"
+          required>
+
+        <button type="submit" class="tam-duyme">
+          Daxil ol
+        </button>
+      </form>
+
+      <!-- Qeydiyyat formu -->
+
+      <form id="registerForm" class="auth-form" hidden>
+        <label for="regName">Adın</label>
+        <input
+          id="regName"
+          type="text"
+          placeholder="Adını daxil et"
+          autocomplete="name"
+          minlength="2"
+          required>
+
+        <label for="regEmail">E-poçt ünvanı</label>
+        <input
+          id="regEmail"
+          type="email"
+          placeholder="email@example.com"
+          autocomplete="email"
+          required>
+
+        <label for="regPassword">Şifrə (ən azı 8 simvol)</label>
+        <input
+          id="regPassword"
+          type="password"
+          placeholder="Yeni şifrə yarat"
+          autocomplete="new-password"
+          minlength="8"
+          required>
+
+        <label for="regConfirm">Şifrəni təkrar yaz</label>
+        <input
+          id="regConfirm"
+          type="password"
+          placeholder="Şifrəni yenidən daxil et"
+          autocomplete="new-password"
+          minlength="8"
+          required>
+
+        <button type="submit" class="tam-duyme">
+          Qeydiyyatdan keç
+        </button>
+      </form>
+
+      <div id="authMesaj" class="mesaj" role="status"
+        aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- Girişdən sonra görünən hissə -->
+
+  <section id="profil" hidden>
+    <h2 id="profilSalam"></h2>
+    <p>Demo profilinə uğurla daxil oldun! 🎉</p>
+    <button onclick="cixisEt()">Hesabdan çıx</button>
+  </section>
+
+  <footer>
+    © 2026 MənimSaytım
+  </footer>
+
+  <script>
+    // Köhnə funksiyanı qoruyuruq.
+    function mesajGoster() {
+      alert("Salam! Saytıma xoş gəlmisən! 🎉");
+    }
+
+    // Bu massiv yalnız səhifə açıq olduğu müddətdə yaşayır.
+    // Səhifə yenilənəndə demo hesablar silinir.
+    const demoHesablar = [];
+
+    let aktivIstifadeci = null;
+
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
+    const authMesaj = document.getElementById("authMesaj");
+
+    function bildiris(metn, nov) {
+      authMesaj.textContent = metn;
+      authMesaj.className = "mesaj " + nov;
+    }
+
+    function hesabiAc(nov) {
+      const qeydiyyat = nov === "register";
+
+      loginForm.hidden = qeydiyyat;
+      registerForm.hidden = !qeydiyyat;
+
+      document.getElementById("loginTab").classList.toggle(
+        "aktiv", !qeydiyyat
+      );
+
+      document.getElementById("registerTab").classList.toggle(
+        "aktiv", qeydiyyat
+      );
+
+      document.getElementById("authBasliq").textContent =
+        qeydiyyat ? "Yeni hesab yarat" : "Hesabına daxil ol";
+
+      document.getElementById("authIzah").textContent =
+        qeydiyyat
+          ? "Məlumatlarını daxil edərək demo hesabı yarat."
+          : "Davam etmək üçün giriş et.";
+
+      bildiris("", "");
+    }
+
+    // Demo qeydiyyat
+    registerForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const ad = document.getElementById("regName").value.trim();
+      const email = document.getElementById("regEmail").value
+        .trim().toLowerCase();
+      const sifre = document.getElementById("regPassword").value;
+      const tekrar = document.getElementById("regConfirm").value;
+
+      if (ad.length < 2) {
+        bildiris("Ad ən azı 2 simvol olmalıdır.", "xeta");
+        return;
+      }
+
+      if (sifre.length < 8) {
+        bildiris("Şifrə ən azı 8 simvol olmalıdır.", "xeta");
+        return;
+      }
+
+      if (sifre !== tekrar) {
+        bildiris("Şifrələr bir-birinə uyğun gəlmir.", "xeta");
+        return;
+      }
+
+      const movcud = demoHesablar.some(
+        hesab => hesab.email === email
+      );
+
+      if (movcud) {
+        bildiris("Bu e-poçtla demo hesab artıq yaradılıb.", "xeta");
+        return;
+      }
+
+      // Yalnız öyrənmə məqsədli, müvəqqəti yaddaş.
+      demoHesablar.push({
+        ad: ad,
+        email: email,
+        sifre: sifre
+      });
+
+      registerForm.reset();
+      hesabiAc("login");
+
+      document.getElementById("loginEmail").value = email;
+
+      bildiris(
+        "Demo hesab yaradıldı! İndi şifrənlə giriş edə bilərsən. " +
+        "Səhifəni yeniləsən hesab silinəcək.",
+        "ugurlu"
+      );
+    });
+
+    // Demo giriş
+    loginForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const email = document.getElementById("loginEmail").value
+        .trim().toLowerCase();
+      const sifre = document.getElementById("loginPassword").value;
+
+      const hesab = demoHesablar.find(
+        item => item.email === email && item.sifre === sifre
+      );
+
+      if (!hesab) {
+        bildiris(
+          "Hesab tapılmadı və ya şifrə yanlışdır. " +
+          "Əvvəlcə bu səhifədə demo qeydiyyatdan keç.",
+          "xeta"
+        );
+        return;
+      }
+
+      aktivIstifadeci = hesab;
+
+      loginForm.hidden = true;
+      registerForm.hidden = true;
+      document.querySelector(".tablar").hidden = true;
+
+      document.getElementById("authBasliq").textContent =
+        "Giriş uğurludur!";
+      document.getElementById("authIzah").textContent =
+        "Demo hesabına daxil oldun.";
+
+      bildiris("Xoş gəlmisən, " + hesab.ad + "!", "ugurlu");
+
+      document.getElementById("profilSalam").textContent =
+        "Salam, " + hesab.ad + "! 👋";
+
+      document.getElementById("profil").hidden = false;
+      document.getElementById("profil").scrollIntoView({
+        behavior: "smooth"
+      });
+    });
+
+    // Demo hesabdan çıxış
+    function cixisEt() {
+      aktivIstifadeci = null;
+
+      document.getElementById("profil").hidden = true;
+      document.querySelector(".tablar").hidden = false;
+
+      loginForm.reset();
+      registerForm.reset();
+
+      hesabiAc("login");
+
+      document.getElementById("hesab").scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+  </script>
+
+</body>
+</html>
